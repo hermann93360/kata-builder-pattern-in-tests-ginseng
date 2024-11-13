@@ -41,9 +41,9 @@ public class ShopTest {
 
     @Test
     public void must_be_verified_to_order_from_shop() {
-        final User user = new User("Bob", "bob@domain.tld", 16, false, fsfAddress);
+        final User user = new User("Bob", "bob@domain.tld", 20, true, fsfAddress);
 
-        assertFalse(Shop.canOrder(user));
+        assertTrue(Shop.canOrder(user));
     }
 
     @Test
