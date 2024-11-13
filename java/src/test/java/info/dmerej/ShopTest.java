@@ -10,11 +10,7 @@ public class ShopTest {
 
     @Test
     public void happy_path() {
-        final User user = defaultUser().but()
-                .withAge(20)
-                .withVerified(true)
-                .withAddres(fsfAddress)
-                .build();
+        final User user = defaultUser();
 
         assertTrue(Shop.canOrder(user));
         assertFalse(Shop.mustPayForeignFee(user));
