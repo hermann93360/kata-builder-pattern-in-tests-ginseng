@@ -10,7 +10,11 @@ public class ShopTest {
 
     @Test
     public void happy_path() {
-        final User user = localUserMajorAndVerified();
+        final User user = defaultUser().but()
+                .withAge(20)
+                .withVerified(true)
+                .withAddres(fsfAddress)
+                .build();
 
         assertTrue(Shop.canOrder(user));
         assertFalse(Shop.mustPayForeignFee(user));
@@ -18,21 +22,29 @@ public class ShopTest {
 
     @Test
     public void minors_cannot_order_from_shop() {
-        final User user = localUserMinorAndVerified();
+        final User user = defaultUser().but()
+                .withAge(17)
+                .withVerified(true)
+                .build();
 
         assertFalse(Shop.canOrder(user));
     }
 
     @Test
     public void must_be_verified_to_order_from_shop() {
-        final User user = localUserMajorAndVerified();
+        final User user = defaultUser().but()
+                .withAge(20)
+                .withVerified(true)
+                .build();
 
         assertTrue(Shop.canOrder(user));
     }
 
     @Test
     public void foreigners_must_pay_foreign_fee() {
-        final User user = foreignUser();
+        final User user = defaultUser().but()
+                .withAddres(parisAddress)
+                .build();
 
         assertTrue(Shop.mustPayForeignFee(user));
     }
